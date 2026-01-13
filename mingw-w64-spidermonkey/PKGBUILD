@@ -13,9 +13,9 @@ url="https://github.com/mcarans/oolite_mozjsnspr_mingw64"
 license=("LGPL")
 makedepends=("${MINGW_PACKAGE_PREFIX}-cc" "make" "nsinstall" "git")
 depends=("${MINGW_PACKAGE_PREFIX}-cc-libs" "${MINGW_PACKAGE_PREFIX}-nspr")
-_commit=c2714c5fb3481192ad8064e802b2f48144d68130
+_commit=a00ec72eb2ef47aad36281aa0330b56ceed585e6
 source=("git+https://github.com/mcarans/${_gitname}#commit=${_commit}")
-sha256sums=('db1ce56abf3397c7b6837fa94523a5785c36a6c9a1e62e262d23bd51b357e48a')
+sha256sums=('39e323ae85c3bb5069b66bab3eeba698e61c00a1b0344e29e50978c901772d94')
 
 pkgver() {
   cd "${srcdir}/${_gitname}"
