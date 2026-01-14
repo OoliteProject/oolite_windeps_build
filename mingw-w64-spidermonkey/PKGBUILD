@@ -13,9 +13,9 @@ url="https://github.com/mcarans/oolite_mozjsnspr_mingw64"
 license=("LGPL")
 makedepends=("${MINGW_PACKAGE_PREFIX}-cc" "make" "nsinstall" "git")
 depends=("${MINGW_PACKAGE_PREFIX}-cc-libs" "${MINGW_PACKAGE_PREFIX}-nspr")
-_commit=a00ec72eb2ef47aad36281aa0330b56ceed585e6
+_commit=07171a7cdf503eab2536e4fc82f1febc590ac538
 source=("git+https://github.com/mcarans/${_gitname}#commit=${_commit}")
-sha256sums=('39e323ae85c3bb5069b66bab3eeba698e61c00a1b0344e29e50978c901772d94')
+sha256sums=('SKIP')
 
 pkgver() {
   cd "${srcdir}/${_gitname}"
@@ -26,6 +26,7 @@ pkgver() {
 build() {
   cd "${srcdir}/${_gitname}/js/src"
   ./build_js_release.sh
+  ./build_js_debug.sh
 }
 
 check() {
@@ -42,6 +43,10 @@ package() {
   cp js32ECMAv5.dll ${pkgdir}${MINGW_PREFIX}/bin
   cp libjs32ECMAv5.dll.a ${pkgdir}${MINGW_PREFIX}/lib
   cp libjs.a ${pkgdir}${MINGW_PREFIX}/lib
+  cd "${srcdir}/${_gitname}/js/src/WINNT5.1_DBG.OBJ"
+  cp libjs32ECMAv5dbg.dll ${pkgdir}${MINGW_PREFIX}/bin
+  cp libjs32ECMAv5dbg.dll.a ${pkgdir}${MINGW_PREFIX}/lib
+  cp libjsdbg.a ${pkgdir}${MINGW_PREFIX}/lib
 
   cd ..
   cp *.h ${pkgdir}${MINGW_PREFIX}/include  
