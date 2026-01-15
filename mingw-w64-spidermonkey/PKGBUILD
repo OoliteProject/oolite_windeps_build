@@ -44,7 +44,7 @@ package() {
   cp libjs32ECMAv5.dll.a ${pkgdir}${MINGW_PREFIX}/lib
   cp libjs.a ${pkgdir}${MINGW_PREFIX}/lib
   cd "${srcdir}/${_gitname}/js/src/WINNT5.1_DBG.OBJ"
-  cp libjs32ECMAv5dbg.dll ${pkgdir}${MINGW_PREFIX}/bin
+  cp js32ECMAv5dbg.dll ${pkgdir}${MINGW_PREFIX}/bin
   cp libjs32ECMAv5dbg.dll.a ${pkgdir}${MINGW_PREFIX}/lib
   cp libjsdbg.a ${pkgdir}${MINGW_PREFIX}/lib
 
