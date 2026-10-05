@@ -15,7 +15,7 @@ makedepends=("${MINGW_PACKAGE_PREFIX}-autotools"
              "${MINGW_PACKAGE_PREFIX}-gcc"
              "${MINGW_PACKAGE_PREFIX}-gcc-objc"
 			 )
-_commit=97b568f19c4165827979348951066622f75ef6e5
+_commit=cafd2c4a73b568b2f0022f15a149963f39c564f3
 source=("git+https://github.com/gnustep/${_gitname}#commit=${_commit}")
 sha256sums=('SKIP')
 
