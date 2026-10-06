@@ -34,9 +34,9 @@ jobs:
         msystem: ${{ matrix.env_msystem }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
-          echo 'header = "Authorization: Bearer '$GITHUB_TOKEN'"' >> ~/.curlrc
-          echo 'header = "Accept: application/vnd.github+json"' >> ~/.curlrc
-          cp ~/.curlrc /c/Users/runneradmin/.curlrc 2>/dev/null || true
+        echo 'header = "Authorization: Bearer '$GITHUB_TOKEN'"' >> ~/.curlrc
+        echo 'header = "Accept: application/vnd.github+json"' >> ~/.curlrc
+        cp ~/.curlrc /c/Users/runneradmin/.curlrc 2>/dev/null || true
         ./install.sh ${{ matrix.compiler }}
 
     - name: Upload to GitHub Release
