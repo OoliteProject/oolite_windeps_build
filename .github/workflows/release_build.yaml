@@ -21,14 +21,6 @@ jobs:
             msystem_type: MINGW64
 
     steps:
-    - name: Pre-setup ownership & curl token
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: |
-        # This must run before the checkout action if the action tries to do git commands
-        echo 'header = "Authorization: Bearer '$GITHUB_TOKEN'"' >> ~/.curlrc
-        echo 'header = "Accept: application/vnd.github+json"' >> ~/.curlrc
-
     - uses: actions/checkout@v6
 
     - name: Set up MSYS2
@@ -36,11 +28,15 @@ jobs:
       with:
         update: true
 
-    - name: Build Oolite Package
+    - name: Build Oolite
       shell: msys2 {0}
       env:
-        msystem: ${{ matrix.msystem_type }}
+        msystem: ${{ matrix.env_msystem }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
+          echo 'header = "Authorization: Bearer '$GITHUB_TOKEN'"' >> ~/.curlrc
+          echo 'header = "Accept: application/vnd.github+json"' >> ~/.curlrc
+          cp ~/.curlrc /c/Users/runneradmin/.curlrc 2>/dev/null || true
         ./install.sh ${{ matrix.compiler }}
 
     - name: Upload to GitHub Release
