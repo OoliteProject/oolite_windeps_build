@@ -17,6 +17,16 @@ jobs:
             env_msystem: MINGW64
 
     steps:
+    - name: Pre-setup ownership & curl token
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        # This must run before the checkout action if the action tries to do git commands
+        mkdir -p "$GITHUB_WORKSPACE"
+        git config --global --add safe.directory "$GITHUB_WORKSPACE"
+        echo 'header = "Authorization: Bearer '$GITHUB_TOKEN'"' >> ~/.curlrc
+        echo 'header = "Accept: application/vnd.github+json"' >> ~/.curlrc
+
     - uses: actions/checkout@v6
 
     - name: Set up MSYS2
