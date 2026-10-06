@@ -77,8 +77,8 @@ for PACKAGE_NAME in "${PACKAGE_NAMES[@]}"; do
 done
 
 pacman -Syu --noconfirm
-pacman -S --noconfirm git pactoys unzip
-pacboy -S --noconfirm espeak-ng jq libpng libvorbis mesa meson ninja nsis openal pcaudiolib python-pip sdl3
+pacman -S --noconfirm git pactoys unzip jq
+pacboy -S --noconfirm espeak-ng libpng libvorbis mesa meson ninja nsis openal pcaudiolib python-pip sdl3
 
 if [[ -z "$1" || "$1" == "clang" ]]; then
     echo "Building GNUStep libraries with clang"
