@@ -151,7 +151,7 @@ fi
 echo "✅ GitVersion installed successfully!"
 
 rm -rf oolite
-git clone --filter=blob:none https://github.com/OoliteProject/oolite.git
+git clone --filter=blob:none https://github.com/mcarans/oolite.git -b inc_processthreadsapi
 cd oolite
 
 ./mk.sh clean dev
