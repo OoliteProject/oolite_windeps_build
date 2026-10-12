@@ -63,22 +63,18 @@ build_install() {
 
 set -o pipefail
 
-pacman -S dos2unix --noconfirm
-pacman -S pactoys --noconfirm
-pacboy -S binutils --noconfirm
-
 rm -rf packages
 mkdir packages
+
+pacman -Syu --noconfirm
+pacman -S --noconfirm binutils dos2unix git jq ntldd pactoys unzip
+pacboy -S --noconfirm espeak-ng libpng libvorbis mesa meson ninja nsis openal pcaudiolib python-pip sdl3
 
 echo "Building common libraries"
 PACKAGE_NAMES=(spidermonkey)
 for PACKAGE_NAME in "${PACKAGE_NAMES[@]}"; do
     build_install "$PACKAGE_NAME"
 done
-
-pacman -Syu --noconfirm
-pacman -S --noconfirm git pactoys unzip jq
-pacboy -S --noconfirm espeak-ng libpng libvorbis mesa meson ninja nsis openal pcaudiolib python-pip sdl3
 
 if [[ -z "$1" || "$1" == "clang" ]]; then
     echo "Building GNUStep libraries with clang"
@@ -161,6 +157,16 @@ else
     echo "❌ Oolite build failed" >&2
     exit 1
 fi
+
+if ./mk.sh test dev; then
+    echo "✅ Oolite test completed successfully"
+else
+    echo "❌ Oolite test failed" >&2
+    cd build/meson_dev/oolite.app
+    ntldd -R oolite.exe
+    exit 1
+fi
+
 cd ..
 
 if ! grep -q "# Custom history settings" ~/.bashrc; then
