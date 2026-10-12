@@ -67,8 +67,8 @@ rm -rf packages
 mkdir packages
 
 pacman -Syu --noconfirm
-pacman -S --noconfirm binutils dos2unix git jq ntldd pactoys unzip
-pacboy -S --noconfirm espeak-ng libpng libvorbis mesa meson ninja nsis openal pcaudiolib python-pip sdl3
+pacman -S --noconfirm dos2unix git jq pactoys unzip
+pacboy -S --noconfirm binutils espeak-ng libpng libvorbis mesa meson ninja nsis ntldd openal pcaudiolib python-pip sdl3
 
 echo "Building common libraries"
 PACKAGE_NAMES=(spidermonkey)
