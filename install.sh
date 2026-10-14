@@ -78,8 +78,6 @@ done
 
 if [[ -z "$1" || "$1" == "clang" ]]; then
     echo "Building GNUStep libraries with clang"
-    export CC=$MINGW_PREFIX/bin/clang
-    export CXX=$MINGW_PREFIX/bin/clang++
     CLANG_PACKAGE_NAMES=(libobjc2 gnustep-make gnustep-base)
     for PACKAGE_NAME in "${CLANG_PACKAGE_NAMES[@]}"; do
         # add clang to filename
@@ -87,10 +85,9 @@ if [[ -z "$1" || "$1" == "clang" ]]; then
     done
     pacman -Q > packages/installed-packages-clang.txt
     NATIVE_FILE="clang.ini"
+    pacboy -S --noconfirm clang lld
 else
     echo "Building GNUStep libraries with gcc"
-    export CC=$MINGW_PREFIX/bin/gcc
-    export CXX=$MINGW_PREFIX/bin/g++
     GCC_PACKAGE_NAMES=(gnustep-make gnustep-base)
     for PACKAGE_NAME in "${GCC_PACKAGE_NAMES[@]}"; do
         # add gcc to filename

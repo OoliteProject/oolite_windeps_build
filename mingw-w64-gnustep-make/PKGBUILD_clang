@@ -12,8 +12,8 @@ mingw_arch=('mingw64' 'ucrt64' 'clang64' 'clangarm64')
 url='https://gnustep.github.org/'
 license=('spdx:GPL-3.0-or-later')
 makedepends=("${MINGW_PACKAGE_PREFIX}-autotools"
-             "${MINGW_PACKAGE_PREFIX}-clang"
-             "${MINGW_PACKAGE_PREFIX}-lld"
+             "${MINGW_PACKAGE_PREFIX}-clang22"
+             "${MINGW_PACKAGE_PREFIX}-lld22"
              "${MINGW_PACKAGE_PREFIX}-libobjc2")
 _commit=cafd2c4a73b568b2f0022f15a149963f39c564f3
 source=("git+https://github.com/gnustep/${_gitname}#commit=${_commit}")
@@ -28,6 +28,10 @@ pkgver() {
 build() {
   mkdir -p "${srcdir}/build-${MSYSTEM}" && cd "${srcdir}/build-${MSYSTEM}"
 
+  export PATH="${MINGW_PREFIX}/opt/llvm22/bin:${PATH}"
+  export CC="clang"
+  export CXX="clang++"
+
   # libobjc2 defers exception handling to the C++ library, so link with a C++ library
   case ${MSYSTEM} in
     MINGW*|UCRT*)
@@ -38,8 +42,6 @@ build() {
       ;;
   esac
 
-  export CC="$MINGW_PREFIX/bin/clang"
-  export CXX="$MINGW_PREFIX/bin/clang++"
   export CFLAGS="$CFLAGS -DSTRICT_APPLE_COMPATIBILITY=1"
 
   ../"${_gitname}"/configure \
