@@ -20,12 +20,12 @@ makedepends=("${MINGW_PACKAGE_PREFIX}-cmake"
              "${MINGW_PACKAGE_PREFIX}-robin-map"
              'git')
 
-_commit=aca3916553665f01550832d02462bcf137c94c39
+_commit=fab3df291a37fefdcc7b774c507ffb2ad5db6fb8
 source=("git+https://github.com/gnustep/${_realname}#commit=${_commit}")
 sha256sums=('SKIP')
 
 pkgver() {
-  cd "${srcdir}/${_gitname}"
+  cd "${srcdir}/${_realname}"
   # Use short hash
   printf "%s" "2.3+$(git rev-parse --short HEAD)"
 }
