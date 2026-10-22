@@ -20,7 +20,7 @@ makedepends=("${MINGW_PACKAGE_PREFIX}-cmake"
              "${MINGW_PACKAGE_PREFIX}-robin-map"
              'git')
 
-_commit=fab3df291a37fefdcc7b774c507ffb2ad5db6fb8
+_commit=a21ae931e4c186312701d7a4a8e85204955965a6
 source=("git+https://github.com/gnustep/${_realname}#commit=${_commit}")
 sha256sums=('SKIP')
 
