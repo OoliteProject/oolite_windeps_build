@@ -24,15 +24,15 @@ depends=("${MINGW_PACKAGE_PREFIX}-cc-libs"
          "${MINGW_PACKAGE_PREFIX}-zlib"
 )
 makedepends=("${MINGW_PACKAGE_PREFIX}-autotools"
-             "${MINGW_PACKAGE_PREFIX}-clang22"
-             "${MINGW_PACKAGE_PREFIX}-lld22"
+             "${MINGW_PACKAGE_PREFIX}-clang"
+             "${MINGW_PACKAGE_PREFIX}-lld"
              "${MINGW_PACKAGE_PREFIX}-gnustep-make"
              "${MINGW_PACKAGE_PREFIX}-curl"
              patch
              patchutils
              rsync)
 
-_commit=9c94e05384c46cec7773b42880c4820b5df82b14
+_commit=85dedc64bd65492a5c0f0f80516688e2db59d57f
 source=("git+https://github.com/gnustep/${_gitname}#commit=${_commit}")
 sha256sums=('SKIP')
 
@@ -46,7 +46,6 @@ build() {
   rsync --recursive --times --links "${srcdir}/${_gitname}"/* "${srcdir}/build-${MSYSTEM}"
   cd "${srcdir}/build-${MSYSTEM}"
 
-  export PATH="${MINGW_PREFIX}/opt/llvm22/bin:${PATH}"
   export CC="clang"
   export CXX="clang++"
 

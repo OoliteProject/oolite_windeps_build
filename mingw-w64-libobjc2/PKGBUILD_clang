@@ -15,12 +15,12 @@ url="https://github.com/gnustep/libobjc2"
 license=('spdx:MIT')
 depends=("${MINGW_PACKAGE_PREFIX}-cc-libs")
 makedepends=("${MINGW_PACKAGE_PREFIX}-cmake"
-             "${MINGW_PACKAGE_PREFIX}-clang22"
-             "${MINGW_PACKAGE_PREFIX}-lld22"
+             "${MINGW_PACKAGE_PREFIX}-clang"
+             "${MINGW_PACKAGE_PREFIX}-lld"
              "${MINGW_PACKAGE_PREFIX}-robin-map"
              'git')
 
-_commit=fab3df291a37fefdcc7b774c507ffb2ad5db6fb8
+_commit=a21ae931e4c186312701d7a4a8e85204955965a6
 source=("git+https://github.com/gnustep/${_realname}#commit=${_commit}")
 sha256sums=('SKIP')
 
@@ -40,8 +40,6 @@ build() {
     extra_config+=("-DCMAKE_BUILD_TYPE=Debug")
   fi
 
-  export PATH="${MINGW_PREFIX}/opt/llvm22/bin:${PATH}"
-
   case ${MSYSTEM} in
     MINGW*|UCRT*)
       export LDFLAGS="-fuse-ld=lld -lstdc++ -lgcc_s"
@@ -58,7 +56,7 @@ build() {
       -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
       -DCMAKE_C_COMPILER="clang" \
       -DCMAKE_CXX_COMPILER="clang++" \
-	  -DOLDABI_COMPAT=ON \
+	  -DOLDABI_COMPAT=OFF \
       -DSTRICT_APPLE_COMPATIBILITY=ON \
       -DCMAKE_DLL_NAME_WITH_SOVERSION=ON \
       -DTESTS=OFF \
